@@ -2,7 +2,9 @@ planetc
 =======
 
 The planetc package contains code for implementing the analytic Mandel & Agol (2002)
-equationsfor planetary transit lightcurves. Uses a C backend with Python/Cython wrappers.
+equationsfor planetary transit lightcurves. To do this, it uses a C backend with 
+Python/Cython wrappers. Routines for calculating radial velocities of Keplerian orbits
+will be added next.
 
 The C backend of planetc was originally based on the one written by Neale Gibson, as part
 of his "MyFunctions" package. There has been a fairly substantial reformatting of those 
