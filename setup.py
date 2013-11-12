@@ -16,10 +16,10 @@ numpy_inc = np.get_include() # numpy headers
 setup(
 
     name = 'planetc',
-    version='0.1', 
+    version='0.0.1', 
     author = 'Tom Evans',
     author_email = 'tom.evans@astro.ox.ac.uk',
-    description = 'Python wrappers for underlying C routines that compute things like transit light curves and radial velocity models.',
+    description = 'The planetc package contains code for implementing the analytic Mandel & Agol (2002) equationsfor planetary transit lightcurves. To do this, it uses a C backend with Python/Cython wrappers. Routines for calculating radial velocities of Keplerian orbits will be added next.',
     packages = [ 'planetc' ],
     ext_modules =
     [
@@ -34,3 +34,4 @@ setup(
     data_files = [ ( '', [ 'README.md', 'INSTALL', 'MANIFEST.in', 'Makefile' ] ) ]
     
     )
+
