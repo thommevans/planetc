@@ -12,6 +12,4 @@ have been modified significantly, and the Python/C API wrappers have been comple
 with the nicer Cython syntax. Tests confirm that the output from planetc exactly matches the
 output from the original MyFunctions routines, with identical computation time.
 
-See INSTALL for instructions on how to install the package. Once the package
-has been installed, you can cd into the examples folder that comes with this
-distribution to check out some basic usage of the planetc routines.
+See INSTALL for instructions on how to install the package. 
