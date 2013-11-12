@@ -1,0 +1,132 @@
+Nov2012 TME
+
+** planetc 
+
+A Python module with C extensions for exoplanet-related tasks such as computing transit 
+light curves and radial velocity variations.
+
+All *.py and *.c source files (along with all *.h headers) are located in the planetc/ folder.
+It is possible to carry out all installation steps using the Makefile in the top level 
+directory; see below for instructions.
+
+
+** External dependencies
+
+- numpy (Python library)
+- gsl, gslcblas (C library)
+
+
+** INSTALLING THE PACKAGE
+
+1. planetc/keporb.c and planetc/ma02.c are the Python/C API wrappers for the underlying C extensions.
+These should already be present, but if they aren't, it will be necessary to construct them
+from the corresponding planetc/keporb.pyx and planetc/ma02.pyx files using cython. Also, if the *.pyx
+files get changed, you will similarly need to recompile the *.c files. The latter is important
+to note, because you must make sure you do this manually. It's not hard at all though, just a
+matter of remembering to do it, and you must have cython installed (or else you have no option
+but to rely on the *.c files that have been provided). Supposing, however, that you do have 
+cython intstalled, then you can recompile the keporb.c and ma02.c files from within the top-level
+directory by entering the following command at the shell command line:
+
+  >> make cython_files
+
+If you don't have Cython installed, and you want to install it, it's very simple. Perhaps the 
+easiest way to do this is to download the Cython package from the online Python Package Index 
+and install it on your system in one command using pip:
+
+  >> pip install --user Cython
+
+where the '--user' flag here what I use, telling Python to install the package in the default
+location under the 'user' scheme. For further options (eg --prefix=<PATHNAME> etc) see the pip
+documentation.
+
+2. Once the planetc/keporb.c and planetc/ma02.c files have been created, the distribution can be built
+with the command:
+
+  >> make build
+
+3. The distribution can then be installed using:
+
+  >> make install INSTALL_OPT='<user-input>'
+
+where <user-input> is a string containing an instruction for where the distribution is to be
+installed, using standard distutils syntax. Specifically, the above command will be 
+translated by the Makefile to carry out the following:
+
+  >> python setup.py install '<user-input>'
+
+For example, the following command:
+
+  >> make install INSTALL_OPT='--prefix=/some/user/specified/folder/'
+
+would install the package lib/ wherever the user would like using the --prefix option. For
+me personally, I prefer to use:
+
+  >> make install INSTALL_OPT='--user'
+
+to make use of the '--user' option, which is what I use for all Python packages that I 
+install manually.
+
+4. Note of course that steps 2 and 3 could be completed in one go using step 3 only, because
+it will generate the intermediate build/ folder if necessary.
+
+5. Once the package has been installed, at the command line you can run:
+
+  >> make clean
+
+which will remove the intermediate build/ folder. Of course, you could just do this yourself
+using:
+
+  >> rm -rf build
+
+
+** FURTHER NOTES ON INSTALLATION:
+
+It is possible that the setup.py script may need to be tweaked if you encounted problems
+with any of the above steps. For instance, the locations of the Python and Numpy installations
+are found by default using:
+
+>> from distutils.sysconfig import get_python_inc
+>> python_inc = get_python_inc()
+>> import numpy as np
+>> numpy_inc = np.get_include()
+
+This is designed to be portable for all systems, but may need to be adjusted if you have an 
+unusual setup. Also, it is assumed that the gsl and gslcblas libraries are installed on the 
+$CPATH and $LIBRARY_PATH, respectively, so that they will be located during the compilation. 
+If this is not the case by default on your system, you will need to append the either the 
+$PATH or $CPATH variable appropriately.
+
+
+** RE-PACKAGING FOR RE-DISTRIBUTION:
+
+If you would like to edit any of the source files and repackage planetc for redistribution, then
+the following easy steps can be taken.
+
+1. Edit any of the source files in the planetc/ folder however you would like.
+
+2. Edit the MANIFEST.in file appropriately to make sure that all of the files you want will be
+bundled into the distribution archive. Currently, this is achieved by including a single line
+
+"graft planetc/"
+
+to tell setup.py to include all of the files (*.py, *.pyx, *.c, *.h etc) in the planetc folder when
+generating the distribution. Note that the MANIFEST.in file is the one that you edit to tell 
+setup.py what to do, but the MANIFEST (without the *.in suffix) is part of the output generated
+by setup.py, which you don't need to touch.
+
+3. Change back into the top level directory and make any necessary changes to the setup.py file.
+If you've just edited files that already existed, this step should be pretty minimal if it is 
+required at all. Otherwise, if you've added new files, you'll have to make sure the setup.py 
+file reflects this update. One important change to make, however, is updating the **version**
+variable in the setup() call. The convention is planetc-X.Y, where relatively minor changes 
+result in increasing the value of Y by 1, and substantial changes result in increasing the value
+of X by 1 and resetting Y to 0.
+
+4. Staying in the top level directory, at the shell command line enter:
+
+  >> python setup.py sdist
+
+This will generate a subfolder dist/ that contains the planetc
+
+
