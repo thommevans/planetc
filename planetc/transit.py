@@ -61,6 +61,7 @@ def ma02_aRs( t, **pars ):
          ['aRs'] semimajor axis in units of stellar radii.
          ['RpRs'] planetary radius in units of stellar radii.
          ['incl'] orbital inclination in degrees.
+         ['b'] = aRs*cos(i), which can be provided instead of 'incl'
          ['ecc'] orbital eccentricity.
          ['SecDepth'] depth of the secondary eclipse; will be set to
            zero if not explicitly specified.
@@ -90,7 +91,11 @@ def ma02_aRs( t, **pars ):
     P = pars[ 'P' ]
     aRs = pars[ 'aRs' ]
     RpRs = pars[ 'RpRs' ]
-    incl_rad = pars[ 'incl' ] * np.pi/180.
+    try:
+        incl_rad = np.deg2rad( pars['incl'] )
+    except:
+        incl_rad = np.arccos( pars['b']/aRs )
+        
     ecc = pars[ 'ecc' ]
     try:
         foot = pars[ 'foot' ]
@@ -141,7 +146,10 @@ def ma02_aRs( t, **pars ):
         NormSep = keporb.NormSep( MeanAnom, aRs, ecc, omega_rad, incl_rad )
     else:
         omega_rad = 3.*np.pi/2.
-        b = aRs*np.cos( incl_rad )
+        try:
+            b = pars['b']
+        except:
+            b = aRs*np.cos( incl_rad )
         NormSep = np.sqrt( ( ( aRs*np.sin( MeanAnom ) )**2. ) \
                            + ( ( b*np.cos( MeanAnom ) )**2. ) )
 
@@ -202,6 +210,8 @@ def ma02_aRs( t, **pars ):
     # eclipse depth will remain the same.
 
     return F
+
+
 
 
 def ma02_RsMsRpMp( t, **pars ):
