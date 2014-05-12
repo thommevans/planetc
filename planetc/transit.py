@@ -94,7 +94,10 @@ def ma02_aRs( t, **pars ):
     try:
         incl_rad = np.deg2rad( pars['incl'] )
     except:
-        incl_rad = np.arccos( pars['b']/aRs )
+        try:
+            incl_rad = np.arccos( pars['b']/aRs )
+        except:
+            raise StandardError( 'Must provide at least one of incl or b' )
         
     ecc = pars[ 'ecc' ]
     try:
