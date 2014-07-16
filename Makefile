@@ -12,8 +12,8 @@ build:
 	python setup.py build
 
 cython_files: 
-	rm planetc/keporb.c
-	rm planetc/ma02.c
+	rm -f planetc/keporb.c
+	rm -f planetc/ma02.c
 	cython planetc/keporb.pyx
 	cython planetc/ma02.pyx
 
