@@ -191,8 +191,8 @@ def ma02_aRs( t, **pars ):
                                pars['c1'], pars['c2'], \
                                pars['c3'], pars['c4'] )
         else:
-            print( '\n\n\n{0:s} not recognised as limb darkening type'\
-                       .format( pars['ld'] ) )
+            print '\n\n\n{0:s} not recognised as limb darkening type'\
+                  .format( pars['ld'] )
             pdb.set_trace() 
 
     # If we're only interested in the secondary eclipses
@@ -586,9 +586,9 @@ def example():
 
     # Discrepencies between output from routines
     # using different parameterisations:
-    print( 'This should be zero --> {0:.10f}'\
-               .format( ( F_RsMsRpMp_q - F_aRs_q ).max() ) )
-    print( 'This should be zero --> {0:.10f}'\
-               .format( ( F_RsMsRpMp_nl - F_aRs_nl ).max() ) )
+    print 'This should be zero --> {0:.10f}'\
+          .format( ( F_RsMsRpMp_q - F_aRs_q ).max() )
+    print 'This should be zero --> {0:.10f}'\
+          .format( ( F_RsMsRpMp_nl - F_aRs_nl ).max() )
 
     return None
