@@ -1,5 +1,5 @@
-PYTHON := /usr/bin/python3
-CYTHON := /usr/bin/cython3
+PYTHON := /usr/bin/python
+CYTHON := /usr/bin/cython
 
 
 INSTALL_OPT = '--prefix=.'
