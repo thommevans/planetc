@@ -18,7 +18,11 @@ directory; see below for instructions.
 
 ** INSTALLING THE PACKAGE
 
-1. planetc/keporb.c and planetc/ma02.c are the Python/C API wrappers for the underlying C extensions.
+1. First, check that the contents of the Makefile are set correctly for your system. In particular,
+   make sure the environment variables PYTHON and CYTHON point to the versions that you would like
+   to use to build the package.
+
+2. planetc/keporb.c and planetc/ma02.c are the Python/C API wrappers for the underlying C extensions.
 These should already be present, but if they aren't, it will be necessary to construct them
 from the corresponding planetc/keporb.pyx and planetc/ma02.pyx files using cython. Also, if the *.pyx
 files get changed, you will similarly need to recompile the *.c files. The latter is important
@@ -40,12 +44,12 @@ where the '--user' flag here what I use, telling Python to install the package i
 location under the 'user' scheme. For further options (eg --prefix=<PATHNAME> etc) see the pip
 documentation.
 
-2. Once the planetc/keporb.c and planetc/ma02.c files have been created, the distribution can be built
+3. Once the planetc/keporb.c and planetc/ma02.c files have been created, the distribution can be built
 with the command:
 
   >> make build
 
-3. The distribution can then be installed using:
+4. The distribution can then be installed using:
 
   >> make install INSTALL_OPT='<user-input>'
 
@@ -67,7 +71,7 @@ me personally, I prefer to use:
 to make use of the '--user' option, which is what I use for all Python packages that I 
 install manually.
 
-4. Note of course that steps 2 and 3 could be completed in one go using step 3 only, because
+5. Note of course that steps 2 and 3 could be completed in one go using step 3 only, because
 it will generate the intermediate build/ folder if necessary.
 
 5. Once the package has been installed, at the command line you can run:
