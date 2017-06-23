@@ -1,6 +1,7 @@
-PYTHON := /usr/bin/python
-CYTHON := /usr/bin/cython
-
+#PYTHON := /usr/bin/python
+#CYTHON := /usr/bin/cython
+PYTHON := /home/tevans/software/anaconda3/bin/python
+CYTHON :=/home/tevans/software/anaconda3/bin/cython
 
 INSTALL_OPT = '--prefix=.'
 

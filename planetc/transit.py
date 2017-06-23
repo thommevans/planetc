@@ -1,8 +1,9 @@
+from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 import pdb, sys, os
-import keporb, ma02
-import phys_consts as consts
+from . import keporb, ma02
+from . import phys_consts as consts
 
 # 15Jul2013 TME:
 #    Actually, I think I worked out that the 'bug' mentioned
@@ -120,6 +121,8 @@ def ma02_aRs( t, **pars ):
     # Following the naming convention of the original
     # Mandel & Agol (2002) paper for the limb darkening
     # coefficients:
+    #print( pars['ld'] )
+    #pdb.set_trace()
     try:
         if pars['ld']=='quad':
             gam1 = pars[ 'gam1' ]
@@ -191,8 +194,8 @@ def ma02_aRs( t, **pars ):
                                pars['c1'], pars['c2'], \
                                pars['c3'], pars['c4'] )
         else:
-            print '\n\n\n{0:s} not recognised as limb darkening type'\
-                  .format( pars['ld'] )
+            print( '\n\n\n{0:s} not recognised as limb darkening type'\
+                  .format( pars['ld'] ) )
             pdb.set_trace() 
 
     # If we're only interested in the secondary eclipses
@@ -586,9 +589,9 @@ def example():
 
     # Discrepencies between output from routines
     # using different parameterisations:
-    print 'This should be zero --> {0:.10f}'\
-          .format( ( F_RsMsRpMp_q - F_aRs_q ).max() )
-    print 'This should be zero --> {0:.10f}'\
-          .format( ( F_RsMsRpMp_nl - F_aRs_nl ).max() )
+    print( 'This should be zero --> {0:.10f}'\
+           .format( ( F_RsMsRpMp_q - F_aRs_q ).max() ) )
+    print( 'This should be zero --> {0:.10f}'\
+           .format( ( F_RsMsRpMp_nl - F_aRs_nl ).max() ) )
 
     return None
